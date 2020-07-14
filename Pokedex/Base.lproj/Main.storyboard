@@ -32,6 +32,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="4Vj-d4-ab9" kind="show" identifier="PokemonSegue" id="sVg-hn-9rx"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -89,6 +92,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="xCi-Tc-Js3"/>
                     </view>
+                    <navigationItem key="navigationItem" id="0uh-iZ-PwH"/>
                     <connections>
                         <outlet property="nameLabel" destination="1af-qW-X2b" id="B6Y-Tb-wze"/>
                         <outlet property="numberLabel" destination="q98-r8-9QK" id="fO1-6F-ZMf"/>

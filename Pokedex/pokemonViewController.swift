@@ -19,6 +19,6 @@ class PokemonViewController: UIViewController {
         super .viewDidLoad()
         
         nameLabel.text = pokemon.name
-        nameLabel.text = String(pokemon.number)
+        numberLabel.text = String(pokemon.number)
     }
 }

@@ -34,6 +34,18 @@ class ViewController: UITableViewController {
         return cell
         
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PokemonSegue" {
+        if let destination = segue.destination as? PokemonViewController {
+            destination.pokemon = pokemon[tableView.indexPathForSelectedRow!.row]
+        }
+        
+    }
+
+
+}
 
 
 }
