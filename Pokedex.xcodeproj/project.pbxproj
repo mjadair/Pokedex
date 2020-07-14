@@ -15,6 +15,7 @@
 		E7C50C4924BC70BB00150DF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7C50C4724BC70BB00150DF9 /* LaunchScreen.storyboard */; };
 		E7C50C5124BC7CB800150DF9 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C50C5024BC7CB800150DF9 /* Pokemon.swift */; };
 		E7C50C5324BC85C300150DF9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7C50C5224BC85C300150DF9 /* Default-568h@2x.png */; };
+		E7C50C5524BDEB3A00150DF9 /* pokemonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C50C5424BDEB3A00150DF9 /* pokemonViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		E7C50C4A24BC70BB00150DF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7C50C5024BC7CB800150DF9 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		E7C50C5224BC85C300150DF9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		E7C50C5424BDEB3A00150DF9 /* pokemonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pokemonViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				E7C50C4724BC70BB00150DF9 /* LaunchScreen.storyboard */,
 				E7C50C4A24BC70BB00150DF9 /* Info.plist */,
 				E7C50C5024BC7CB800150DF9 /* Pokemon.swift */,
+				E7C50C5424BDEB3A00150DF9 /* pokemonViewController.swift */,
 			);
 			path = Pokedex;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 			files = (
 				E7C50C4124BC70B500150DF9 /* ViewController.swift in Sources */,
 				E7C50C5124BC7CB800150DF9 /* Pokemon.swift in Sources */,
+				E7C50C5524BDEB3A00150DF9 /* pokemonViewController.swift in Sources */,
 				E7C50C3D24BC70B500150DF9 /* AppDelegate.swift in Sources */,
 				E7C50C3F24BC70B500150DF9 /* SceneDelegate.swift in Sources */,
 			);
