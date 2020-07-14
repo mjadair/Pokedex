@@ -31,6 +31,8 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate {
         // We call the superClass for viewDidLoad
         super.viewDidLoad()
         
+        // now the delegate property of our searchBar is this PokemonListViewController
+         searchBar.delegate = self
         
         // guard allows us to handle url even if it is null
         guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=151") else {
@@ -46,11 +48,14 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate {
                 return
             }
             
-            
+            // here we decode the data from above using JSON Decoder and assign it to entries via the PokemonListResults model
+            // we then set the above pokemon variable to be entries.results
             do {
                 let entries = try JSONDecoder().decode(PokemonListResults.self, from: data)
                 self.pokemon = entries.results
                 DispatchQueue.main.async {
+                    
+                    // this reloads the table when the data is updated
                     self.tableView.reloadData()
                 }
             }
@@ -60,20 +65,25 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate {
         }.resume()
     }
     
+    // sets the number of columns in the table
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    // sets the number of rows in the table to be the pokemon count
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return pokemon.count
     }
     
+    // sets all the cells to contain the name of each pokemon
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonCell", for: indexPath)
         cell.textLabel?.text = capitalise(text: pokemon[indexPath.row].name)
         return cell
     }
     
+    
+    // the segue comes from our storyboard. This listens for the ShowPokemonSegue and sets the destination to the PokemonViewController if true
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowPokemonSegue",
                 let destination = segue.destination as? PokemonViewController,
@@ -81,5 +91,15 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate {
             destination.url = pokemon[index].url
         }
     }
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+      // implement your search here!
+    }
+    
+    
+    
+    
+    
 }
 
