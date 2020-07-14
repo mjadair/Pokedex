@@ -30,6 +30,7 @@ class PokemonViewController: UIViewController {
         type2Label.text = ""
 
         loadPokemon()
+        
     }
 
     func loadPokemon() {
@@ -53,6 +54,7 @@ class PokemonViewController: UIViewController {
                             self.type2Label.text = typeEntry.type.name
                         }
                     }
+
                 }
             }
             catch let error {

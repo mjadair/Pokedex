@@ -14,7 +14,8 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate {
     
     // This is our Pokemon, returned from the results - from the Pokemon Models.
     var pokemon: [PokemonListResult] = []
-        
+    var filteredPokemon: [PokemonListResult] = []
+    
     // Creates an outlet for our Searchbar to link this controller to the storyboard
     @IBOutlet var searchBar: UISearchBar!
     
@@ -53,6 +54,7 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate {
             do {
                 let entries = try JSONDecoder().decode(PokemonListResults.self, from: data)
                 self.pokemon = entries.results
+                self.filteredPokemon = entries.results
                 DispatchQueue.main.async {
                     
                     // this reloads the table when the data is updated
@@ -72,13 +74,13 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate {
     
     // sets the number of rows in the table to be the pokemon count
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pokemon.count
+        return filteredPokemon.count
     }
     
     // sets all the cells to contain the name of each pokemon
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonCell", for: indexPath)
-        cell.textLabel?.text = capitalise(text: pokemon[indexPath.row].name)
+        cell.textLabel?.text = capitalise(text: filteredPokemon[indexPath.row].name)
         return cell
     }
     
@@ -88,13 +90,26 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate {
         if segue.identifier == "ShowPokemonSegue",
                 let destination = segue.destination as? PokemonViewController,
                 let index = tableView.indexPathForSelectedRow?.row {
-            destination.url = pokemon[index].url
+            destination.url = filteredPokemon[index].url
         }
     }
     
     
+    
+    
+    
+    // search functionality
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-      // implement your search here!
+        
+        if searchText == ""{
+            return filteredPokemon = pokemon
+        }
+      
+        filteredPokemon = pokemon.filter { (pokemon: PokemonListResult) -> Bool in
+          return pokemon.name.lowercased().contains(searchText.lowercased())
+        }
+        
+        tableView.reloadData()
     }
     
     
