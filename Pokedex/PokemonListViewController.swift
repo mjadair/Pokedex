@@ -10,6 +10,7 @@ import UIKit
 
 class PokemonListViewController: UITableViewController {
     var pokemon: [PokemonListResult] = []
+        @IBOutlet var searchBar: UILabel!
     
     func capitalise(text: String) -> String {
         return text.prefix(1).uppercased() + text.dropFirst()

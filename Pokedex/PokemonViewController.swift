@@ -16,7 +16,8 @@ class PokemonViewController: UIViewController {
     @IBOutlet var type1Label: UILabel!
     @IBOutlet var type2Label: UILabel!
 
-    func capitalize(text: String) -> String {
+
+    func capitalise(text: String) -> String {
         return text.prefix(1).uppercased() + text.dropFirst()
     }
 
@@ -40,8 +41,8 @@ class PokemonViewController: UIViewController {
             do {
                 let result = try JSONDecoder().decode(PokemonResult.self, from: data)
                 DispatchQueue.main.async {
-                    self.navigationItem.title = self.capitalize(text: result.name)
-                    self.nameLabel.text = self.capitalize(text: result.name)
+                    self.navigationItem.title = self.capitalise(text: result.name)
+                    self.nameLabel.text = self.capitalise(text: result.name)
                     self.numberLabel.text = String(format: "#%03d", result.id)
 
                     for typeEntry in result.types {
