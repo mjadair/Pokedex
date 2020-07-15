@@ -16,6 +16,9 @@ class PokemonViewController: UIViewController {
     @IBOutlet var type1Label: UILabel!
     @IBOutlet var type2Label: UILabel!
     @IBOutlet var button: UIButton!
+    
+    
+    var pokemon: PokemonResult!
 
 
     func capitalise(text: String) -> String {
@@ -29,8 +32,10 @@ class PokemonViewController: UIViewController {
         numberLabel.text = ""
         type1Label.text = ""
         type2Label.text = ""
-
         loadPokemon()
+        
+        
+ 
         
     }
     
@@ -49,6 +54,13 @@ class PokemonViewController: UIViewController {
                     self.navigationItem.title = self.capitalise(text: result.name)
                     self.nameLabel.text = self.capitalise(text: result.name)
                     self.numberLabel.text = String(format: "#%03d", result.id)
+                    self.pokemon = result
+                    self.pokemon.caught = false
+                    
+                    
+                    self.pokemon.caught ? self.button.setTitle("Caught!", for: .normal) : self.button.setTitle("Catch!", for: .normal)
+                    
+                    print(result)
 
                     for typeEntry in result.types {
                         if typeEntry.slot == 1 {
@@ -73,8 +85,18 @@ class PokemonViewController: UIViewController {
     
     @IBAction func toggleCatch() {
       // gotta catch 'em all!
+
+        if !pokemon.caught {
+            button.setTitle("Caught!", for: .normal)
+            pokemon.caught.toggle()
+        }
+        else {
+            button.setTitle("Catch!", for: .normal)
+            pokemon.caught.toggle()
+        }
+
     }
-    
+//
     
     
     

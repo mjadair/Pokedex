@@ -24,6 +24,7 @@ struct PokemonResult: Codable {
     let id: Int
     let name: String
     let types: [PokemonTypeEntry]
+    var caught: Bool! = false 
 }
 
 struct PokemonTypeEntry: Codable {
