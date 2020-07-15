@@ -54,10 +54,10 @@ class PokemonViewController: UIViewController {
 
                     for typeEntry in result.types {
                         if typeEntry.slot == 1 {
-                            self.type1Label.text = typeEntry.type.name
+                            self.type1Label.text = self.capitalise(text: typeEntry.type.name)
                         }
                         else if typeEntry.slot == 2 {
-                            self.type2Label.text = typeEntry.type.name
+                            self.type2Label.text = self.capitalise(text: typeEntry.type.name)
                         }
                     }
                     
@@ -97,7 +97,7 @@ class PokemonViewController: UIViewController {
     // this is the logic that toggles between catching and releasing on button click
     @IBAction func toggleCatch() {
         
-        print(caughtPokemon)
+        print(userData)
 
         if caughtPokemon.caught[nameLabel.text!] == false || caughtPokemon.caught[nameLabel.text!] == nil {
                 
