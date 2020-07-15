@@ -15,6 +15,7 @@ class PokemonViewController: UIViewController {
     @IBOutlet var numberLabel: UILabel!
     @IBOutlet var type1Label: UILabel!
     @IBOutlet var type2Label: UILabel!
+    @IBOutlet var button: UIButton!
 
 
     func capitalise(text: String) -> String {
@@ -32,6 +33,9 @@ class PokemonViewController: UIViewController {
         loadPokemon()
         
     }
+    
+    
+    
 
     func loadPokemon() {
         URLSession.shared.dataTask(with: URL(string: url)!) { (data, response, error) in
@@ -62,5 +66,20 @@ class PokemonViewController: UIViewController {
             }
         }.resume()
     }
+    
+    
+    
+    // this is the button logic allowing us to mark a pokemon as caught
+    
+    @IBAction func toggleCatch() {
+      // gotta catch 'em all!
+    }
+    
+    
+    
+    
+    
+    
+    
 }
 
