@@ -20,6 +20,7 @@ class PokemonViewController: UIViewController {
     @IBOutlet var type1Label: UILabel!
     @IBOutlet var type2Label: UILabel!
     @IBOutlet var button: UIButton!
+    @IBOutlet var pokemonImage: UIImageView!
     
 
     func capitalise(text: String) -> String {
@@ -51,6 +52,14 @@ class PokemonViewController: UIViewController {
                     self.navigationItem.title = self.capitalise(text: result.name)
                     self.nameLabel.text = self.capitalise(text: result.name)
                     self.numberLabel.text = String(format: "#%03d", result.id)
+                    
+                    
+                    let imageURL = URL(string: result.sprites.front_default)
+                    
+                    let pokemonData = try? Data(contentsOf: imageURL!)
+                     
+                    self.pokemonImage.image = UIImage(data: pokemonData!)
+
 
                     for typeEntry in result.types {
                         if typeEntry.slot == 1 {
@@ -91,6 +100,21 @@ class PokemonViewController: UIViewController {
             }
         }.resume()
     }
+    
+    
+    
+//    func loadImages() { URLSession.shared.dataTask(with: URL(string: url)!) { (data, response, error) in
+//        guard let data = data else {
+//            return
+//        }
+//        
+//    }
+    
+    
+    
+    
+    
+    
     
     
     

@@ -101,8 +101,12 @@ class PokemonListViewController: UITableViewController, UISearchBarDelegate {
     // search functionality
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        if searchText == ""{
-            return filteredPokemon = pokemon
+        print(searchText)
+        
+        if searchText == "" {
+            filteredPokemon = pokemon
+            tableView.reloadData()
+            return
         }
       
         filteredPokemon = pokemon.filter { (pokemon: PokemonListResult) -> Bool in
