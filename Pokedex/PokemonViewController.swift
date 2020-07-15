@@ -8,6 +8,9 @@
 
 import UIKit
 
+
+var caughtPokemon = CaughtPokemon.init(caught: [ : ] )
+
 class PokemonViewController: UIViewController {
     var url: String!
 
@@ -17,9 +20,6 @@ class PokemonViewController: UIViewController {
     @IBOutlet var type2Label: UILabel!
     @IBOutlet var button: UIButton!
     
-    
-    var pokemon: PokemonResult!
-
 
     func capitalise(text: String) -> String {
         return text.prefix(1).uppercased() + text.dropFirst()
@@ -54,13 +54,6 @@ class PokemonViewController: UIViewController {
                     self.navigationItem.title = self.capitalise(text: result.name)
                     self.nameLabel.text = self.capitalise(text: result.name)
                     self.numberLabel.text = String(format: "#%03d", result.id)
-                    self.pokemon = result
-                    self.pokemon.caught = false
-                    
-                    
-                    self.pokemon.caught ? self.button.setTitle("Caught!", for: .normal) : self.button.setTitle("Catch!", for: .normal)
-                    
-                    print(result)
 
                     for typeEntry in result.types {
                         if typeEntry.slot == 1 {
@@ -84,16 +77,19 @@ class PokemonViewController: UIViewController {
     // this is the button logic allowing us to mark a pokemon as caught
     
     @IBAction func toggleCatch() {
-      // gotta catch 'em all!
 
-        if !pokemon.caught {
-            button.setTitle("Caught!", for: .normal)
-            pokemon.caught.toggle()
-        }
-        else {
-            button.setTitle("Catch!", for: .normal)
-            pokemon.caught.toggle()
-        }
+        if caughtPokemon.caught[nameLabel.text!] == false || caughtPokemon.caught[nameLabel.text!] == nil {
+                
+                button.setTitle("Release", for: .normal)
+                caughtPokemon.caught[nameLabel.text!] = true
+                
+            }
+            
+            
+            else{
+                button.setTitle("Catch", for: .normal)
+                caughtPokemon.caught[nameLabel.text!] = false
+            }
 
     }
 //

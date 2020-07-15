@@ -37,5 +37,12 @@ struct PokemonType: Codable {
 }
 
 
+struct CaughtPokemon {
+ 
+ var caught = [String: Bool]()
+
+ }
+
+
 
 
