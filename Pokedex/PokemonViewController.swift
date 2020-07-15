@@ -10,6 +10,7 @@ import UIKit
 
 
 var caughtPokemon = CaughtPokemon.init(caught: [ : ] )
+var userData = UserDefaults.standard
 
 class PokemonViewController: UIViewController {
     var url: String!
@@ -60,6 +61,18 @@ class PokemonViewController: UIViewController {
                         }
                     }
                     
+                    // checks the UserDefaults class for any previous true or false values for this pokemon. Allowing us to maintain state when the app is restarted
+                    
+                    if userData.bool(forKey: self.nameLabel.text!) == true {
+                                    
+                                    caughtPokemon.caught[self.nameLabel.text!] = true
+                      
+                                    
+                                }
+                    
+                    
+                    
+                    
                     // sets the default state for the button when the page renders
                     if caughtPokemon.caught[self.nameLabel.text!] == false || caughtPokemon.caught[self.nameLabel.text!] == nil  {
                             
@@ -83,11 +96,14 @@ class PokemonViewController: UIViewController {
     
     // this is the logic that toggles between catching and releasing on button click
     @IBAction func toggleCatch() {
+        
+        print(caughtPokemon)
 
         if caughtPokemon.caught[nameLabel.text!] == false || caughtPokemon.caught[nameLabel.text!] == nil {
                 
                 button.setTitle("Release", for: .normal)
                 caughtPokemon.caught[nameLabel.text!] = true
+                userData.set(true, forKey: nameLabel.text!)
                 
             }
             
@@ -95,6 +111,7 @@ class PokemonViewController: UIViewController {
             else{
                 button.setTitle("Catch", for: .normal)
                 caughtPokemon.caught[nameLabel.text!] = false
+                userData.set(false, forKey: nameLabel.text!)
             }
 
     }
