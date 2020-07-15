@@ -33,10 +33,6 @@ class PokemonViewController: UIViewController {
         type1Label.text = ""
         type2Label.text = ""
         loadPokemon()
-        
-        
- 
-        
     }
     
     
@@ -63,7 +59,18 @@ class PokemonViewController: UIViewController {
                             self.type2Label.text = typeEntry.type.name
                         }
                     }
+                    
+                    // sets the default state for the button when the page renders
+                    if caughtPokemon.caught[self.nameLabel.text!] == false || caughtPokemon.caught[self.nameLabel.text!] == nil  {
+                            
+                        self.button.setTitle("Catch", for: .normal)
+                           
+                       }
+                    else if caughtPokemon.caught[self.nameLabel.text!] == true {
+                            
+                        self.button.setTitle("Release", for: .normal)
 
+                       }
                 }
             }
             catch let error {
@@ -74,8 +81,7 @@ class PokemonViewController: UIViewController {
     
     
     
-    // this is the button logic allowing us to mark a pokemon as caught
-    
+    // this is the logic that toggles between catching and releasing on button click
     @IBAction func toggleCatch() {
 
         if caughtPokemon.caught[nameLabel.text!] == false || caughtPokemon.caught[nameLabel.text!] == nil {
@@ -92,12 +98,6 @@ class PokemonViewController: UIViewController {
             }
 
     }
-//
-    
-    
-    
-    
-    
     
 }
 
