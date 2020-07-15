@@ -14,11 +14,14 @@ var userData = UserDefaults.standard
 
 class PokemonViewController: UIViewController {
     var url: String!
+    
+    var infoUrl: String!
 
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var numberLabel: UILabel!
     @IBOutlet var type1Label: UILabel!
     @IBOutlet var type2Label: UILabel!
+    @IBOutlet var pokemonBio: UITextView!
     @IBOutlet var button: UIButton!
     @IBOutlet var pokemonImage: UIImageView!
     
@@ -32,14 +35,14 @@ class PokemonViewController: UIViewController {
 
         nameLabel.text = ""
         numberLabel.text = ""
+        pokemonBio.text = ""
         type1Label.text = ""
         type2Label.text = ""
         loadPokemon()
+        
+        
     }
     
-    
-    
-
     func loadPokemon() {
         URLSession.shared.dataTask(with: URL(string: url)!) { (data, response, error) in
             guard let data = data else {
@@ -52,6 +55,9 @@ class PokemonViewController: UIViewController {
                     self.navigationItem.title = self.capitalise(text: result.name)
                     self.nameLabel.text = self.capitalise(text: result.name)
                     self.numberLabel.text = String(format: "#%03d", result.id)
+                    self.infoUrl = "https://pokeapi.co/api/v2/pokemon-species/" + String(result.id) + "/"
+                    
+                    self.loadPokemonInfo()
                     
                     
                     let imageURL = URL(string: result.sprites.front_default)
@@ -75,12 +81,8 @@ class PokemonViewController: UIViewController {
                     if userData.bool(forKey: self.nameLabel.text!) == true {
                                     
                                     caughtPokemon.caught[self.nameLabel.text!] = true
-                      
                                     
                                 }
-                    
-                    
-                    
                     
                     // sets the default state for the button when the page renders
                     if caughtPokemon.caught[self.nameLabel.text!] == false || caughtPokemon.caught[self.nameLabel.text!] == nil  {
@@ -103,13 +105,29 @@ class PokemonViewController: UIViewController {
     
     
     
-//    func loadImages() { URLSession.shared.dataTask(with: URL(string: url)!) { (data, response, error) in
-//        guard let data = data else {
-//            return
-//        }
-//        
-//    }
-    
+    func loadPokemonInfo() {
+           URLSession.shared.dataTask(with: URL(string: infoUrl)!) { (data, response, error) in
+               guard let data = data else {
+                   return
+               }
+
+               do { let result = try JSONDecoder().decode(PokemonInfo.self, from: data)
+                 DispatchQueue.main.async {
+                
+                    self.pokemonBio.text = result.flavor_text_entries[0].flavor_text
+                    
+                    
+                    print(self.pokemonBio.text)
+                
+                }
+                
+            }
+            catch let error {
+                           print(error)
+                       }
+                   }.resume()
+            
+    }
     
     
     

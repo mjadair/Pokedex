@@ -37,6 +37,14 @@ struct PokemonType: Codable {
 }
 
 
+struct PokemonInfo: Codable {
+    
+   let flavor_text_entries: [PokemonBio]
+}
+
+struct PokemonBio: Codable {
+  let flavor_text: String
+}
 
 struct Images: Codable {
  let front_default: String
